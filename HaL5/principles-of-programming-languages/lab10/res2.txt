@@ -1,0 +1,3 @@
+Đầu ra: bear
+
+Giải thích: dark(X), thick(X) -> brown(X), thick(X) mà ta có thick(bear) và dark(bear) nên đáp án là bear.

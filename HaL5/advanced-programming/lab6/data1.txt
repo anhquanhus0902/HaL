@@ -1,0 +1,36 @@
+M01
+Nguyễn Văn Quản
+1988
+3000
+M02
+Trần Thị Lý
+1990
+2600
+E01
+Ngọc Thị Trinh
+1990
+1000
+E02
+Nguyễn Văn Bảo
+1993
+800
+DS01
+Trần Văn Khoa
+1995
+1500
+2
+DS02
+Nguyễn Thị Học
+1992
+1600
+3
+DV01
+Hoàng Văn Lập
+1998
+1300
+2
+DV02
+Nguyễn Cao Trình
+1996
+1400
+3

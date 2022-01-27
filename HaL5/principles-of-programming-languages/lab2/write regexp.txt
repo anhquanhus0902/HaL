@@ -1,0 +1,7 @@
+- Exe1
+	a) \<the\>
+	b) \<language\>
+	c) \<the\>\s*\<langualge\>
+
+- Exe2
+	a) ^.*(the.*

@@ -1,0 +1,9 @@
+Đầu ra của p(X) là a , a, b và d
+
+Giải thích:
+    - a đầu tiên là do ta có p(A)
+    - a thứ hai là do 
+        + p(X) :- q(X), r(X).     /*#2*/
+        mà q(X) :- s(X) và ta có s(a) và r(a)
+    - b cũng tương tự như a thứ hai
+    - d là do p(X) :- u(X) mà ta có u(d)

@@ -1,0 +1,7 @@
+Nhân viên trong công ty ABC.
+Employee:id=7130908, fullName=Pham Vu Anh Quan, birthDay=09/02/2001, phone=0964683963, email=pvquans22@abc.com, employeeType=0, employeeCount=1, ExpInYear=3, Proskill=Lap trinh
+Employee:id=6718493, fullName=Tran The Anh, birthDay=09/02/2004, phone=09734234, email=theanh1@abc.com, employeeType=2, employeeCount=2, Major=mtkhtt, Semester=6, University Name=hus
+Employee:id=347127, fullName=Tran Thu Ha, birthDay=06/11/2002, phone=0123455678, email=hatran@abc.com, employeeType=1, employeeCount=3, Graduation Date=12/09/2020, Graduation Rank=gioi, Education=hus
+Số lượng nhân viên đã nhập: 3
+Employee:id=7998605, fullName=Tran Hoang Anh, birthDay=15/11/1999, phone=0765123987, email=tha@abc.com, employeeType=1, employeeCount=1, Graduation Date= 20/06/2021, Graduation Rank= xuat sac, Education=hus
+Số lượng nhân viên đã nhập: 1

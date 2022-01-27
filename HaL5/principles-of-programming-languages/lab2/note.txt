@@ -1,0 +1,25 @@
+. -> khớp với 1 ký tự bất kỳ
+^ -> biểu thị cho sự bắt đầu của dòng
+$ -> biểu thị cho sự kết thúc của dòng
+r ở đầu mô hình -> chỉ ra rằng đây là 1 rawstring, nghĩa là trình thông dịch của Python không nên cố gắng giải thích bất kỳ ký tự đặc biệt nào
+[] -> tập hợp ký tự, phù hợp nếu có bất kỳ ký tự nào trong dấu []
+[a-z] -> bất kỳ chữ thường từ a đến z, tương tự cho [A-Z] và [0-9] => [a-zA-Z0-9]
+[^] -> tập hợp ký tự phủ định, phù hợp nếu không có ký tự nào trong []
+| -> biểu diễn thay thế, phép toán OR
+* -> lặp lại 0 đến nhiều lần, vd: a*, [a-z]*
++ -> lặp lại 1 đến nhiều lần
+? -> tùy chọn có hay không cho 1 pattern cho trước, vd như p? có nghĩa là dù p có xuất hiện hay không thì nó vẫn phù hợp
+\ -> ký tự escape, biểu diễn ký tự đặc biệt [ ] ( ) { } . * blabla
+\n -> chỉ ra dòng mới
+\t -> chỉ ra tab
+\w -> khớp với bất kỳ chữ cái, số và gạch dưới
+\d -> khớp với các chữ số
+\S -> khớp với ký tự khác dấu cách
+\s -> khớp với các ký tự khoảng trắng
+\b -> chỉ khớp với từ có độ dài chính xác, vd: \b[a-b]{5}\b
+nắm bắt các nhóm là các phần của pattern được đặt trong dấu ngoặc đơn
+{n} -> ký tự đứng trước lặp lại n lần
+{n,} -> ký tự đứng trước lặp lại ít nhất n lần
+{n,m} -> ký tự đứng trước lặp lại ít nhất n lần và nhiều nhất m lần
+() -> nhóm
+()\n -> nhóm lặp lại n+1 lần <- chưa rõ là gì, SAI

@@ -1,0 +1,13 @@
+Bài 2
+
+- Ý 1:
+    Kiểu dữ liệu trừu tượng QueueADT vi phạm bất biến kiểu dữ liệu vì:
+        Trong hàm enqueue và front, kiểu dữ liệu đại diện cho đầu vào là Queue a mà Queue a = Q ([a], [a]) 
+        nhưng khi viết hàm thì lại là Queue (front, rear) thay vì Q (front, rear) => vi phạm
+
+- Ý 2:
+    + Hàm enqueue:
+        enqueue x (Queue (front, rear)) = Q (front, x:rear) sửa thành enqueue x (Q (front, rear)) = Q (front, x:rear)
+
+    + Hàm front:
+        front (Queue (front, rear)) = head front sửa thành front (Q (front, rear)) = head front
