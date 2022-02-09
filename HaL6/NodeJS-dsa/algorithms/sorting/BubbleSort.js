@@ -1,5 +1,9 @@
 const swap = require('./swap');
 
+/**
+ * 
+ * @param {Array} arr
+ */
 function bubbleSort(arr) {
     for (var i = 0; i < arr.length-1; ++i) {
         for (var j = i+1; j < arr.length; ++j) {
@@ -8,9 +12,12 @@ function bubbleSort(arr) {
             }
         }
     }
-    return arr;
 }
 
+/**
+ * 
+ * @param {Array} arr
+ */
 function reverseBubbleSort(arr) {
     for (var i = 0; i < arr.length-1; ++i) {
         for (var j = i+1; j < arr.length; ++j) {
@@ -19,7 +26,6 @@ function reverseBubbleSort(arr) {
             }
         }
     }
-    return arr;
 }
 
 module.exports = {

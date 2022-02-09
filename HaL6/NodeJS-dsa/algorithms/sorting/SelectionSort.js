@@ -1,5 +1,9 @@
 const swap = require('./swap');
 
+/**
+ * 
+ * @param {Array} arr
+ */
 function selectionSort(arr) {
     for (var i = 0; i < arr.length-1; ++i) {
         var indexOfElementHasMinValue = i;
@@ -10,9 +14,12 @@ function selectionSort(arr) {
         }
         swap(arr, i, indexOfElementHasMinValue);
     }
-    return arr;
 }
 
+/**
+ * 
+ * @param {Array} arr
+ */
 function reverseSelectionSort(arr) {
     for (var i = 0; i < arr.length-1; ++i) {
         var indexOfElementHasMaxValue = i;
@@ -23,7 +30,6 @@ function reverseSelectionSort(arr) {
         }
         swap(arr, i, indexOfElementHasMaxValue);
     }
-    return arr;
 }
 
 module.exports = {

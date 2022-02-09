@@ -1,0 +1,15 @@
+{
+  "name": "js-ds-algos",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "testsort": "node ./algorithms/sorting/SortTest.js",
+    "testsearch": "node ./algorithms/searching/SearchTest.js",
+    "testcrypto": "node ./algorithms/cryptography/CryptoTest.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
