@@ -45,3 +45,30 @@ Recommenders systems capture the pattern of people's behaviour and use it to pre
 
 ### Content-Based Recommender Systems
 
+### Collaborative Filtering
+
+Collaborative filtering has basically two approaches: user-based and item-based.
+
+- User-based collaborative filtering
+  - Based on user's neighborhood
+
+- Item-based collaborative filtering
+  - Based on item's similarity
+
+#### User-based collaborative filtering
+
+Collaborative filtering basis this similarity on things like history, preference, and choices that users make when buying, watching, or enjoying something.
+
+#### Steps
+
+1. Learning the similarity weights
+2. Create the weighted ratings matrix
+
+#### Challenges of collaborative filtering
+
+- Data Sparsity
+  - Users in general rate only a limited number of items
+- Cold start
+  - Difficult in recommendation to new users or new items
+- Scalability
+  - Increase in number of users or items
