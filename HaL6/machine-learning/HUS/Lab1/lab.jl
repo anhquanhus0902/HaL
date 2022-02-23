@@ -129,7 +129,7 @@ classify(tr[1], tr[2], [1 0 1 0])
 function evaluate(θ_k, θ_jk, X, y)
 	# Step 1: X, θ_k,, θ_jk ==> y_hat
 	# Step 2: compare y_hat with y
-	return abs(classify(θ_k, θ_jk, X)-y)
+	return classify(θ_k, θ_jk, X) == y
 end
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
