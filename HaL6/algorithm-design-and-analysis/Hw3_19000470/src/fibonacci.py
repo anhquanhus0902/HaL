@@ -2,22 +2,25 @@
 
 # II.3
 
+import sys
 import time
 import numpy as np
 import matplotlib.pyplot as plt
 
-def fibonacci(n:int) -> int:
+sys.stdout.reconfigure(encoding='utf-8')
+
+def fibonacci(n: int) -> int:
 	if n < 2:
 		return n
 	return fibonacci(n-2) + fibonacci(n-1)
 
-def calculateExecutionTime(inputNumber:int) -> int:
+def calculateExecutionTime(inputNumber: int) -> int:
 	startTime = time.time()
 	fibonacci(inputNumber)
 	finishTime = time.time()
 	return finishTime-startTime
 
-def evaluate(k:int) -> None:
+def evaluate(k: int) -> None:
 	inputPoints = timePoints = np.array([])
 	for i in range(k+1):
 		inputNumber = 5*i
