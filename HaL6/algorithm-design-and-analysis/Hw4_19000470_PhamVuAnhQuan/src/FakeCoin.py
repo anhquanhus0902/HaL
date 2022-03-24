@@ -27,7 +27,7 @@ def createRandomCoins(n: int) -> list:
     coins = [0 if i == indexOfFakeCoin else 1 for i in range(n)]
     return coins    
 
-def findFakeCoin(coins: list, sizeOfPile=0) -> None:
+def findFakeCoin(coins: list, sizeOfPile: int = 0) -> None:
     n = len(coins)
     n = n-1 if n%2 == 1 else n
     mid = ceil(n/2)
@@ -47,7 +47,7 @@ def solve(n: int) -> None:
 
 if __name__ == "__main__":
     try:
-        n = int(input('Số lượng đồng xu: '))
-        solve(n) if n > 0 else print('n phải lớn hơn 0')
+        n = int(input('Number of coins: '))
+        solve(n) if n > 0 else print('n must be greater than 0')
     except Exception:
         traceback.print_exc()

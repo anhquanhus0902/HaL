@@ -34,7 +34,7 @@ def evaluate(k: int) -> None:
 if __name__ == "__main__":
     try:
         print('Evaluation')
-        k = int(input('k = ?\n(pls choose a number that larger than or equal to 0 and smaller than 10 :))\n'))
+        k = int(input('k = ?\n(pls choose a number that greater than or equal to 0 and smaller than 10 :))\n'))
         if (k >= 0):
             evaluate(k)
         else:
