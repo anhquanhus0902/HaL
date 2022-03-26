@@ -6,7 +6,7 @@ import traceback
 import numpy as np
 import matplotlib.pyplot as plt
 
-def binarySearch(lst: list, target) -> int:
+def binarySearch(lst: list, target: int) -> int:
     n = len(lst)
     l = 0
     r = n-1
@@ -20,9 +20,12 @@ def binarySearch(lst: list, target) -> int:
             return mid
     return -1
 
-def calculateExecutionTime(sizeOfArray: int) -> int:
-    a = [random.randint(-999, i+999) for i in range(sizeOfArray)]
-    a.sort()
+def createRandomListOfIntegers(size: int) -> list:
+    a = [random.randint(-999, i+999) for i in range(size)]
+    return a
+
+def calculateExecutionTime(sizeOfList: int) -> int:
+    a = sorted(createRandomListOfIntegers(sizeOfList))
     target = random.randint(-1499, 1499)
     startTime = time.time_ns()
     binarySearch(a, target)
@@ -41,7 +44,13 @@ def evaluate(k: int) -> None:
 
 if __name__ == "__main__":
     try:
-        print('Evaluation')
+        print('Test')
+        n = int(input('n = ?\n'))
+        lst = sorted(createRandomListOfIntegers(n))
+        print('Random list:\n{}'.format(lst))
+        target = int(input('Pls choose the target number.\n'))
+        print(binarySearch(lst, target))
+        print('----------------------------Evaluation')
         k = int(input('k = ?\n(pls choose a number that greater than or equal to 0 and smaller than 10 :))\n'))
         if (k >= 0):
             evaluate(k)

@@ -1,4 +1,5 @@
 Source code đặt tại thư mục 'src'
+Thực thi chương trình: ./filename hoặc python filename
 
 Bài                 |   File                |
 --------------------------------------------|
