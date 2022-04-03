@@ -5,8 +5,9 @@ import random
 import traceback
 import numpy as np
 import matplotlib.pyplot as plt
+from typing import List, Tuple
 
-def findMinMax(lst: list, l: int, r: int) -> int:
+def findMinMax(lst: List[int], l: int, r: int) -> Tuple[int, int]:
     if l == r:
         return (min(lst[l], lst[r]), max(lst[l], lst[r]))
     else:
@@ -15,7 +16,7 @@ def findMinMax(lst: list, l: int, r: int) -> int:
         (min2, max2) = findMinMax(lst, mid+1, r)
         return (min(min1, min2), max(max1, max2))
 
-def createRandomListOfIntegers(size: int) -> list:
+def createRandomListOfIntegers(size: int) -> List[int]:
     a = [random.randint(-999, i+999) for i in range(size)]
     return a
 

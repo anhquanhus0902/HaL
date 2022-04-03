@@ -5,6 +5,7 @@ import sys
 import random
 import traceback
 from math import ceil
+from typing import List
 
 sys.stdout.reconfigure(encoding='utf-8')
 
@@ -22,12 +23,12 @@ sys.stdout.reconfigure(encoding='utf-8')
         - Nếu có sự chênh lệch, ta thực hiện lại thao tác vừa rồi với chồng nhẹ hơn (vì chồng đó nhẹ hơn nên chắc chắn đồng xu giả nằm trong đó).
 '''
 
-def createRandomCoins(n: int) -> list:
+def createRandomCoins(n: int) -> List[int]:
     indexOfFakeCoin = random.randint(0, n-1)
     coins = [0 if i == indexOfFakeCoin else 1 for i in range(n)]
     return coins    
 
-def findFakeCoin(coins: list, sizeOfPile: int = 0) -> None:
+def findFakeCoin(coins: List[int], sizeOfPile: int = 0) -> None:
     n = len(coins)
     n = n-1 if n%2 == 1 else n
     mid = ceil(n/2)

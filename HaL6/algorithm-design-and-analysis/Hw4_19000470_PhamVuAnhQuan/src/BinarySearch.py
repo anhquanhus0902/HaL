@@ -5,8 +5,11 @@ import random
 import traceback
 import numpy as np
 import matplotlib.pyplot as plt
+# Type Hinting Generics in Standard Collections only works for Python version 3.9 onwards
+# https://docs.python.org/3/whatsnew/3.9.html#type-hinting-generics-in-standard-collections
+from typing import List
 
-def binarySearch(lst: list, target: int) -> int:
+def binarySearch(lst: List[int], target: int) -> int:
     n = len(lst)
     l = 0
     r = n-1
@@ -20,7 +23,7 @@ def binarySearch(lst: list, target: int) -> int:
             return mid
     return -1
 
-def createRandomListOfIntegers(size: int) -> list:
+def createRandomListOfIntegers(size: int) -> List[int]:
     a = [random.randint(-999, i+999) for i in range(size)]
     return a
 
@@ -49,8 +52,8 @@ if __name__ == "__main__":
         lst = sorted(createRandomListOfIntegers(n))
         print('Random list:\n{}'.format(lst))
         target = int(input('Pls choose the target number.\n'))
-        print(binarySearch(lst, target))
-        print('----------------------------Evaluation')
+        print('Index of the target number: {}'.format(binarySearch(lst, target)))
+        print('----------------------------\nEvaluation')
         k = int(input('k = ?\n(pls choose a number that greater than or equal to 0 and smaller than 10 :))\n'))
         if (k >= 0):
             evaluate(k)
