@@ -1,0 +1,35 @@
+#!/usr/bin/env python
+
+import traceback
+import cv2
+import numpy as np
+from numpy import linalg as LA
+from PIL import Image
+
+sMax = LA.norm(np.array([170, -85, -85]))
+
+def handle(p: tuple[int]):
+    p = np.asarray(p)
+    c = np.sum(p)
+    R = np.array([c, 0, 0])
+    v = np.array([c/3, c/3, c/3])
+    x = R - v
+    s = p - v
+    xNorm = LA.norm(x)
+    sNorm = LA.norm(s)
+    h = np.arccos(np.dot(s, x)/(sNorm*xNorm))
+    s = sNorm
+    v = LA.norm(v)
+    return (int(h), int(s), int(v))
+
+def rgb2hsv(fileName: str):
+    im = Image.open(fileName)
+    pix = im.load()
+    w, h = im.size
+    for i in range(w):
+        for j in range(h):
+            pix[i,j] = handle(pix[i,j])
+    im.save(fileName + 'HSV.jpg')
+
+if __name__ == "__main__":
+    rgb2hsv('test-img-1.jpg')
