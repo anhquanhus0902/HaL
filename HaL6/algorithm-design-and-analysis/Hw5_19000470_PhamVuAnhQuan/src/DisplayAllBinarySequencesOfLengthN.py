@@ -1,15 +1,16 @@
 #!/usr/bin/env python
 
 import traceback
+from typing import List
 
-def listToString(lst: list, separator: str = ' ') -> str:
+def listToString(lst: List[int], separator: str = ' ') -> str:
     return separator.join(str(el) for el in lst)
 
 def solve1(n: int) -> None:
     x = [290322 for i in range(n)]
     solve(x, n)
 
-def solve(x: list, n: int, i: int = 0) -> None:
+def solve(x: List[int], n: int, i: int = 0) -> None:
     for v in range(2):
         x[i] = v
         if i == n-1:
