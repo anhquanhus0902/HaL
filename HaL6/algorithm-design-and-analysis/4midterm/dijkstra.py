@@ -8,7 +8,7 @@ import helper
 Python program implementing Dijkstra's algoritm
 '''
 
-INF = 10**10 - 1
+INF = 10**1000 - 1
 
 # page 362
 test_adjacency_matrix = [
@@ -25,12 +25,9 @@ def dijkstra(adjacency_matrix, source_vertex):
     d, p, Q = dict(), dict(), dict()
     for v in range(n):
         V.add(v)
-        d[v] = INF
-        p[v] = -1
+        d[v] = INF if v != source_vertex else 0
+        p[v] = None
         Q[v] = d[v]
-    
-    d[source_vertex] = 0
-    Q[source_vertex] = 0
     
     for i in range(n):
         u_star = min(Q, key=Q.get)
@@ -50,7 +47,7 @@ if __name__ == "__main__":
         # adjacency_matrix = helper.to_adjacency_matrix(g)
         g = helper.adjacency_matrix_to_networkx_graph(test_adjacency_matrix)
         helper.draw_graph(g)
-        d, p = dijkstra(test_adjacency_matrix, 1)
+        d, p = dijkstra(test_adjacency_matrix, 0)
         print('d:', d)
         print('p:', p)
         if input('evaluate? (Y/n): ').lower() == 'y':
