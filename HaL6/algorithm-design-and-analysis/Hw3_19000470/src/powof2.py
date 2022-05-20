@@ -9,7 +9,7 @@ III. Bài toán kiểm tra 1 số có phải là luỹ thừa của 2 hay không
 - Độ phức tạp tính toán: O(log(n))
 '''
 
-def isPowOf2(n:int) -> bool:
+def isPowOf2(n: int) -> bool:
 	if n == 0:
 		return False
 	if n == 1:
