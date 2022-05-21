@@ -10,13 +10,13 @@ f = open('steps.txt', 'r')
 steps_data = f.readlines()
 f.close()
 count = 0
+rely1 = 0.92
 
 def parse():
     global idx
     splitted = [img.split('.') for img in imgs]
     idx = [int(el[0]) for el in splitted]
     idx.sort()
-parse()
 
 def show_image(path=path + '/'+ imgs[0]):
     global canvas1, im
@@ -68,15 +68,44 @@ def text_genr():
 def auto_run():
     global count
     count = 0
+    show_mid_btn(2)
+    auto_run2()
+    
+def stop():
+    show_mid_btn(3)
+    auto_run2(False)
+    
+def continue1():
+    show_mid_btn(2)
     auto_run2()
 
-def auto_run2(waitTime=1000):
-    global count, window
+def auto_run2(flag=True, waitTime=1000):
+    global count, window, b
+    if flag == False:
+        window.after_cancel(b)
+        count -= 1
+        return
     if count < max(idx)+1:
         text_genr()
         show_image('{}/{}.jpg'.format(path, count))
         count += 1
-        window.after(waitTime, auto_run2)
+        b = window.after(waitTime, auto_run2)
+    if count == max(idx)+1:
+        show_mid_btn(1)
+        
+def show_mid_btn(flag):
+    global autobtn
+    try:
+        autobtn.destroy()
+    except:
+        pass
+    if flag == 1:
+        autobtn = Button(mainFrame, text='Auto', font=font, command=auto_run)
+    elif flag == 2:
+        autobtn = Button(mainFrame, text='Stop', font=font, command=stop)
+    elif flag == 3:
+        autobtn = Button(mainFrame, text='Continue', font=font, command=continue1)
+    autobtn.place(relx=0.5, rely=rely1, anchor=CENTER)
 
 # window
 window = Tk()
@@ -91,6 +120,8 @@ mainFrame.pack(side=TOP, fill='both', expand=True)
 # canvas
 canvas1 = Canvas(mainFrame, bg='#D1D1D1')
 canvas1.pack(side=TOP, fill='both', expand=True)
+
+parse()
 text_genr()
 show_image()
 
@@ -101,14 +132,12 @@ font = ('Arial', '18')
 # previous image
 backbtn = Button(mainFrame, text='Back', font=font, command=go_back)
 # auto run
-autobtn = Button(mainFrame, text='Auto', font=font, command=auto_run)
+show_mid_btn(True)
 # next image
 nextbtn = Button(mainFrame, text='Next', font=font, command=go_next)
 
 # set place
-rely1 = 0.92
 backbtn.place(relx=0.4, rely=rely1, anchor=CENTER)
-autobtn.place(relx=0.5, rely=rely1, anchor=CENTER)
 nextbtn.place(relx=0.6, rely=rely1, anchor=CENTER)
 
 window.mainloop()
