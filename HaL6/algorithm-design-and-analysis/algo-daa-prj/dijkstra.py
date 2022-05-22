@@ -77,9 +77,9 @@ def dijkstra(weight_matrix: List[List[int]] = test_weight_matrix, source_vertex:
 
 if __name__ == "__main__":
     try:
-        # test2 = helper.generate_random_graph(7, 0.9)
-        # test3 = helper.to_adjacency_matrix(test2)
-        # res = dijkstra4v(test3, 2)
+        #test2 = helper.generate_random_graph(7, 0.9)
+        #test3 = helper.to_adjacency_matrix(test2)
+        #res = dijkstra4v(test3, 4)
         res = dijkstra4v(test_weight_matrix, 0)
         print(res[0])
         print(res[1])
