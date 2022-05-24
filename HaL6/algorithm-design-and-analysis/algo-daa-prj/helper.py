@@ -81,6 +81,13 @@ def write_steps(steps_data):
     f.write(steps_data)
     f.close()
 
+def write_paths(paths):
+    paths2 = '\n'.join(paths)
+    f = open('path.txt', 'a')
+    f.write('\n')
+    f.write(paths2)
+    f.close()
+
 def save_graph_image():
     global count, dirid
     plt.savefig('{}/{}.jpg'.format(dirid, count))

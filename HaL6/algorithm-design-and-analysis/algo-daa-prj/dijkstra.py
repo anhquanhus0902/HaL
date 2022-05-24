@@ -49,6 +49,23 @@ def dijkstra4v(weight_matrix: List[List[int]] = test_weight_matrix, source_verte
     helper.write_steps(steps_data)
     return (d,p)
 
+def get_paths(p, source_vertex):
+    re = [[v] for v in p]
+    for v in p:
+        u = v
+        while True:
+            i = p[u]
+            if i == None:
+                re[v] = '{} to {}: No path'.format(source_vertex, v)
+                break
+            u = i
+            re[v].insert(0, i)
+            if i == source_vertex:
+                re[v] = ' -> '.join([str(j) for j in re[v]])
+                re[v] = '{} to {}: '.format(source_vertex, v) + re[v]
+                break
+    return re
+
 def dijkstra(weight_matrix: List[List[int]] = test_weight_matrix, source_vertex: int = 0) -> Tuple[Dict[int,int]]:
     n = len(weight_matrix)
     V = set()
@@ -77,12 +94,17 @@ def dijkstra(weight_matrix: List[List[int]] = test_weight_matrix, source_vertex:
 
 if __name__ == "__main__":
     try:
-        # test2 = helper.generate_random_graph(6, 0.7)
+        source_vertex = 0
+        # test2 = helper.generate_random_graph(6, 0.5)
         # test3 = helper.to_adjacency_matrix(test2)
-        # res = dijkstra4v(test3, 2)
-        res = dijkstra4v(test_weight_matrix, 0)
+        # res = dijkstra4v(test3, source_vertex)
+        res = dijkstra4v(test_weight_matrix, source_vertex)
         print(res[0])
         print(res[1])
+        paths = get_paths(res[1], source_vertex)
+        helper.write_paths(paths)
+        for path in paths:
+            print(path)
         # if input('evaluate (Y/n) ').lower() == 'y':
         #     helper.evaluate(dijkstra, 5, 1)
         # else:

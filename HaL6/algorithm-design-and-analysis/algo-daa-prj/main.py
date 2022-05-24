@@ -3,8 +3,9 @@ from PIL import Image, ImageTk
 import os
 
 f = open('path.txt', 'r')
-path = f.read()
-imgs = os.listdir(path)
+paths = [line.rstrip() for line in f.readlines()]
+path_of_dir = paths[0]
+imgs = os.listdir(path_of_dir)
 f.close()
 f = open('steps.txt', 'r')
 steps_data = f.readlines()
@@ -18,10 +19,18 @@ def parse():
     idx = [int(el[0]) for el in splitted]
     idx.sort()
 
-def show_image(path=path + '/'+ imgs[0]):
+def show_image(path=path_of_dir + '/'+ imgs[0]):
     global canvas1, im
     im = ImageTk.PhotoImage(Image.open(path).resize((800, 600)))
     canvas1.create_image(800, 320, image=im)
+
+def show_paths():
+    try:
+        canvas1.delete('paths')
+    except:
+        pass
+    paths_text = 'Paths:\n' + '\n'.join(paths[1:])
+    canvas1.create_text(120, 550, text=paths_text, font=('Arial', '14'), tags=('paths'))
 
 def go_back():
     global count, canvas1
@@ -29,20 +38,21 @@ def go_back():
         count -= 1
         if count > 0:
             text_genr()
-        show_image('{}/{}.jpg'.format(path, count))
+        show_image('{}/{}.jpg'.format(path_of_dir, count))
 
 def go_next():
     global count, canvas1
     if count < max(idx):
         count += 1
         text_genr()
-        show_image('{}/{}.jpg'.format(path, count))
+        show_image('{}/{}.jpg'.format(path_of_dir, count))
 
 def text_genr():
     global canvas1
     if count == max(idx):
         canvas1.delete('current_vertex')
         canvas1.create_text(140, 200, text='DONE! :)', font=('Arial', '20'), fill='red', tags=('current_vertex'))
+        show_paths()
         return
     font = ('Arial', '14')
     i = 4*count
@@ -87,7 +97,7 @@ def auto_run2(flag=True, waitTime=1000):
         return
     if count < max(idx)+1:
         text_genr()
-        show_image('{}/{}.jpg'.format(path, count))
+        show_image('{}/{}.jpg'.format(path_of_dir, count))
         count += 1
         b = window.after(waitTime, auto_run2)
     if count == max(idx)+1:
