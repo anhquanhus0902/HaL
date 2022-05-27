@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+from cv2 import COLOR_BGR2GRAY
 import numpy as np
 import cv2
 
@@ -17,13 +18,20 @@ def usm(im, radius=0, sigma=3.0, amount=1):
     return unshapr_im
 
 def reorder(approx):
+    # reshape to a 4x2 matrix
     approx = approx.reshape((4, 2))
-    output = np.zeros((4, 1, 2), dtype=np.int32)
+    output = np.zeros((4, 2), dtype=np.int32)
+    # get x+y of each point in approx
     add = approx.sum(1)
+    # point with smallest sum
     output[0] = approx[np.argmin(add)]
+    # point with biggest sum
     output[3] =approx[np.argmax(add)]
+    # get x-y of each point in approx
     diff = np.diff(approx, axis=1)
+    # point with smallest diff
     output[1] =approx[np.argmin(diff)]
+    # point with biggest diff
     output[2] = approx[np.argmax(diff)]
     return output
 
@@ -51,7 +59,7 @@ def perspective_transform(im, contour_of_doc):
         pts2 = np.float32([[0, 0],[w, 0], [0, h],[w, h]])
         matrix = cv2.getPerspectiveTransform(pts1, pts2)
         output = cv2.warpPerspective(im, matrix, (w, h))
-        output=output[20:output.shape[0] - 20, 20:output.shape[1] - 20]
+        # output=output[10:output.shape[0] - 10, 10:output.shape[1] - 10]
         output = cv2.resize(output,(w,h))
     return output
 
