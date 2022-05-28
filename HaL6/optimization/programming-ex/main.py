@@ -18,9 +18,14 @@ secondOrderGradientOfRosembrock = lambda x: np.array([[1200*x[0]**2 - 400*x[1] +
 
 stopCondition = lambda x: sqrt(firstOrderGradientOfRosembrock(x)[0]**2  + firstOrderGradientOfRosembrock(x)[1]**2) <= 10**-4
 
-startPoint1 = np.array([1.2, 1.2])
-startPoint2 = np.array([-1.2, 1])
+startPoints = [np.array([1.2, 1.2]), np.array([-1.2, 1])]
 actualResult = np.array([1, 1])
+
+stopReasons = (
+    'Stop reason: norm of the first order gradient <= 10^-4.',
+    'Stop reason: exceed the number of iterations.',
+    'Stop reason: small enough error.'
+)
 
 # ex1
 # Backtracking line search algorithm
@@ -34,39 +39,37 @@ def backtrackingLineSearch(f, x, deltax, gradient, alpha=1, rho=0.8, c=0.5):
 def gradientDescent(startPoint, f=Rosembrock, gradient=firstOrderGradientOfRosembrock, iters=1000):
     x = startPoint
     count = 0
-    for i in range(iters):
+    for _ in range(iters):
         if stopCondition(x):
-            return x, count, 'Stop reason: norm of the first order gradient <= 10^-4.'
+            return x, count, stopReasons[0]
         g1 = gradient(x)
         deltax = -g1
         t = backtrackingLineSearch(f, x, deltax, g1)
         x = x + t*deltax
         count += 1
-    return x, count, 'Stop reason: numbers of iteration >= %d.' % count
+    return x, count, stopReasons[1]
 
 # ex2
 # Newton method
 def Newton(startPoint, f=Rosembrock, firstOrderGradient=firstOrderGradientOfRosembrock, secondOrderGradient=secondOrderGradientOfRosembrock, eps=10**-9, iters=1000):
     x = startPoint
     count = 0
-    for i in range(iters):
+    for _ in range(iters):
         if stopCondition(x):
-            return x, count, 'Stop reason: norm of the first order gradient <= 10^-4.'
+            return x, count, stopReasons[0]
         g1 = firstOrderGradient(x)
         g2 = np.linalg.inv(secondOrderGradient(x))
-        deltaxnt = -np.dot(g2, g1)
+        deltax = -np.dot(g2, g1)
         lambda2 = np.dot(g1, np.dot(g1, g2))
         if lambda2/2 <= eps:
-            return x, count, 'Stop reason: small enough error.'
-        t = backtrackingLineSearch(f, x, deltaxnt, g1)
-        # t = 1
-        x = x + t*deltaxnt
+            return x, count, stopReasons[2]
+        t = backtrackingLineSearch(f, x, deltax, g1)
+        x = x + t*deltax
         count += 1
-    return x, count, 'Stop reason: numbers of iteration >= %d.' % count
+    return x, count, stopReasons[1]
 
 def calExecTime(*methods):
     re = dict()
-    startPoints = [startPoint1, startPoint2]
     for method in methods:
         for startPoint in startPoints:
             startTime = time.time()
@@ -77,7 +80,6 @@ def calExecTime(*methods):
         
 def evaluateResult(*methods):
     re = dict()
-    startPoints = [startPoint1, startPoint2]
     for method in methods:
         for startPoint in startPoints:
             res = method(startPoint=startPoint)[0]
@@ -86,20 +88,18 @@ def evaluateResult(*methods):
     return re
 
 if __name__ == "__main__":
-    numstr = 'Numbers of iteration: '
+    numstr = 'Number of iteration: '
     l = 150
     print('Exercise 1'.center(l, '-'))
     print('Gradient descent with Backtracking Line Search')
-    res1 = gradientDescent(startPoint=startPoint1)
-    res2 = gradientDescent(startPoint=startPoint2)
-    print('\tStart point: {} => {}\n\t\t{}\n\t\t{}{}'.format(tuple(startPoint1), res1[0], res1[2], numstr, res1[1]))
-    print('\tStart point: {} => {}\n\t\t{}\n\t\t{}{}'.format(tuple(startPoint2), res2[0], res2[2], numstr, res2[1]))
+    for startPoint in startPoints:
+        re = gradientDescent(startPoint=startPoint)
+        print('\tStart point: {} => {}\n\t\t{}\n\t\t{}{}'.format(tuple(startPoint), re[0], re[2], numstr, re[1]))
     print('Exercise 2'.center(l, '-'))
     print('Newton method with Backtracking Line Search')
-    res3 = Newton(startPoint=startPoint1)
-    res4 = Newton(startPoint=startPoint2)
-    print('\tStart point: {} => {}\n\t\t{}\n\t\t{}{}'.format(tuple(startPoint1), res3[0], res3[2], numstr, res3[1]))
-    print('\tStart point: {} => {}\n\t\t{}\n\t\t{}{}'.format(tuple(startPoint2), res4[0], res4[2], numstr, res4[1]))
+    for startPoint in startPoints:
+        re = Newton(startPoint=startPoint)
+        print('\tStart point: {} => {}\n\t\t{}\n\t\t{}{}'.format(tuple(startPoint), re[0], re[2], numstr, re[1]))
     print('Exercise 3'.center(l, '-'))
     print('Evaluate')
     print('\tExecution time')
