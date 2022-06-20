@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
-from platform import python_branch
 import traceback
 import preprocessing
+import detext
 import cv2
 from tkinter import *
 from tkinter import filedialog, messagebox
@@ -33,24 +33,26 @@ def show_image(x, y, im, fixed_h=640, fixed_w=480):
     canvas1.create_image(x, y, image=tk_im)
 
 def choose_file():
-    global im, choosen
+    global im, choosen, filename2
     filetypes = (
         ('All files', '*.*'),
         ('JPEG files', '*.jpg'),
         ('PNG files', '*.png')
     )
-    filename = filedialog.askopenfilename(title='Choose an image', initialdir='./', filetypes=filetypes)
+    filename = filedialog.askopenfilename(title='Choose an image', initialdir='./images', filetypes=filetypes)
     if filename:
+        filename2 = filename.split('/')[-1]
         im = cv2.imread(filename)
         choosen = True
         show_image(640, 360, im)
 
-def auto_crop():
+def process():
     global im, choosen
     if choosen:
-        drawed_contours = preprocessing.preprocess(im)
-        # im2pdf(im)
-        show_image(640, 360, drawed_contours)
+        re = preprocessing.preprocess(im)
+        re2 = detext.detext(re)
+        cv2.imwrite('output/{}'.format(filename2), re2)
+        show_image(640, 360, re2)
     else:
         messagebox.showwarning(title=None, message='Please choose an image')
         
@@ -74,7 +76,7 @@ canvas1.pack(side=TOP, fill='both', expand=True)
 # canvas1.create_line(0, 360, 1280, 360)
 choose_file_btn = Button(frame1, text='Pick', font=('Arial', '18'), command=choose_file)
 choose_file_btn.place(relx=0.2, rely=0.4, anchor=CENTER)
-auto_crop_btn = Button(frame1, text='Crop', font=('Arial', '18'), command=auto_crop)
+auto_crop_btn = Button(frame1, text='Process', font=('Arial', '18'), command=process)
 auto_crop_btn.place(relx=0.2, rely=0.5, anchor=CENTER)
 
 if __name__ == "__main__":
