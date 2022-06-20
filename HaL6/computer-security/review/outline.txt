@@ -1,8 +1,0 @@
-Link: https://huseduvn-my.sharepoint.com/:f:/g/personal/hoangquochung_hus_edu_vn/EgR80hoiBN1Jh7CQId-ivTIBImj_-V62ig1z2upJ14GNEQ?e=fmQzdb
-
-Return to Libc
-Format String
-Race Condition
-CSRF
-XSS
-SQL Injection
